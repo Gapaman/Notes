@@ -13,12 +13,6 @@
         android:title="@string/main"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_favorite"
-        android:icon="@android:drawable/btn_star_big_on"
-        android:orderInCategory="20"
-        android:title="@string/favorite"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/action_search"
         android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="5"
@@ -26,3 +20,4 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
 </menu>
+

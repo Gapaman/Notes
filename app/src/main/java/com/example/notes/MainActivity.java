@@ -1,8 +1,12 @@
 package com.example.notes;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,6 +18,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
@@ -28,23 +34,52 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        initToolbar();
+        Toolbar toolbar = initToolbar();
+        initDrawer(toolbar);
         initButtonMain();
-        initButtonFavorite();
         initButtonSettings();
         initButtonBack();
     }
 
-    private void initToolbar() {
+    private Toolbar initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        return toolbar;
     }
+
+    private void initDrawer(Toolbar toolbar) {
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (navigateFragment(id)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Обработка выбора пункта меню приложения (активити)
         int id = item.getItemId();
+        if (navigateFragment(id)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    private boolean navigateFragment(int id) {
         switch (id) {
             case R.id.action_settings:
                 addFragment(new SettingsFragment());
@@ -53,8 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 addFragment(new Notes());
                 return true;
         }
-        return super.onOptionsItemSelected(item);
+        return false;
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,16 +138,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addFragment(new SettingsFragment());
-            }
-        });
-    }
-
-    private void initButtonFavorite() {
-        Button buttonFavorite = findViewById(R.id.buttonFavorite);
-        buttonFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addFragment(new Notes());
             }
         });
     }
