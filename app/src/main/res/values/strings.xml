@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Notes</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delete_before_add">Удалить перед добавлением</string>
+    <string name="back_as_remove_fragment">Назад как удалить фрагмент</string>
+    <string name="replace">заменить</string>
+    <string name="add">добавить</string>
+    <string name="new_fragment">Новый фрагмент:</string>
+    <string name="use_backstack">Используйте backstack</string>
+    <string name="main_screen">Главный экран</string>
+    <string name="favorite_screen">Предпочтительный экран</string>
+    <string name="settings">Настройки</string>
+    <string name="favorite">Предпочтительный </string>
+    <string name="main">Главный</string>
+    <string name="back">Назад</string>
+    <string name="search">search</string>
+    <string name="item1">item1</string>
+    <string name="item2">item2</string>
+    <string name="new_menu_item_added">Menu item added</string>
 </resources>

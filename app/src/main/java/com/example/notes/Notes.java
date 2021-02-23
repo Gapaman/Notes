@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +58,9 @@ public class Notes extends Fragment {
 
         Intent intent = new Intent();
         intent.setClass(getActivity(), NoteDescription.class);
+        Bundle args = new Bundle();
+        args.putSerializable("Array", (Serializable) notes);
+        intent.putExtra("BUNDLE", args);
         startActivity(intent);
     }
 
