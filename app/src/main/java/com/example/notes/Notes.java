@@ -1,23 +1,29 @@
 package com.example.notes;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notes extends Fragment {
-    private List<SimpleNote> notes = new ArrayList<>();
+public class Notes extends Fragment implements NotesAdapterCallback{
+    private final List<SimpleNote> notes = new ArrayList<>();
+    private final NotesAdapter notesAdapter = new NotesAdapter(this);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initArrayList();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,44 +31,32 @@ public class Notes extends Fragment {
         return inflater.inflate(R.layout.fragment_notes, container, false);
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initArrayList();
-        initList(view);
-
+        initView(view);
     }
 
-    private void initList(View view) {
-
-        LinearLayout layoutView = (LinearLayout) view;
-        String note = "";
-        for (int i = 0; i < notes.size(); i++) {
-            note = String.valueOf(notes.get(i));
-            TextView tv = new TextView(getContext());
-            tv.setText(note);
-            tv.setTextSize(30f);
-            layoutView.addView(tv);
-            final int fi = i;
-            tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showDescriptionNotes(fi);
-                }
-            });
-        }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        notesAdapter.setItems(notes);
     }
 
-    private void showDescriptionNotes(int index) {
-
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), NoteDescription.class);
-        Bundle args = new Bundle();
-        args.putSerializable("Array", (Serializable) notes);
-        intent.putExtra("BUNDLE", args);
-        startActivity(intent);
+    @Override
+    public void onOnItemClicked(int position) {
+       SimpleNote note = notes.get(position);
+        Toast.makeText(requireContext(), note.getTitle(), Toast.LENGTH_SHORT).show();
     }
+
+    private void initView(View view) {
+        RecyclerView recyclerView = view.findViewById(R.id.notes_rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), RecyclerView.VERTICAL));
+        recyclerView.addItemDecoration(new SpaceDecorator(getResources().getDimensionPixelSize(R.dimen.default_margin)));
+        recyclerView.setAdapter(notesAdapter);
+    }
+
 
 
     private void initArrayList() {

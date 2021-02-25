@@ -6,4 +6,9 @@
     android:orientation="vertical"
     tools:context=".Notes">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notes_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

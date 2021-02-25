@@ -21,14 +21,21 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (savedInstanceState == null) {
+            Fragment fragment = new Notes();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.drawer_layout, fragment)
+                    .commit();
+        }
         readSettings();
         initView();
     }
@@ -190,7 +197,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void readSettings() {
         SharedPreferences sharedPref = getSharedPreferences(Settings.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
-        // Считываем значения настроек
         Settings.IsBackStack = sharedPref.getBoolean(Settings.IS_BACK_STACK_USED, false);
         Settings.IsAddFragment = sharedPref.getBoolean(Settings.IS_ADD_FRAGMENT_USED, true);
         Settings.IsBackAsRemove = sharedPref.getBoolean(Settings.IS_BACK_AS_REMOVE_FRAGMENT, true);

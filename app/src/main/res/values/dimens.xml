@@ -4,4 +4,7 @@
     <dimen name="fragment_dimen">40sp</dimen>
     <dimen name="nav_header_height">200dp</dimen>
     <dimen name="nav_header_dimen">42sp</dimen>
+    <dimen name="box_inset_layout_padding">0dp</dimen>
+    <dimen name="inner_frame_layout_padding">5dp</dimen>
+    <dimen name="default_margin">16dp</dimen>
 </resources>

@@ -13,8 +13,21 @@ public class SimpleNote implements Serializable {
         this.data = data;
     }
 
-    @Override
-    public String toString() {
-        return title + " "+desc+" " + data ;
+    public String getTitle() {
+        return title;
     }
-}
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public String getDate() {
+        return data;
+    }
+
+        @Override
+        public String toString () {
+            return title + " " + desc + " " + data;
+        }
+    }
+

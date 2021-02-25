@@ -20,4 +20,5 @@
     <string name="fragment_navigation">Навигация</string>
     <string name="navigation_drawer_open">Откройте навигации</string>
     <string name="navigation_drawer_close">Закрыть </string>
+    <string name="Item">Item</string>
 </resources>
