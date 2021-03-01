@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,14 +29,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            Fragment fragment = new Notes();
+            Fragment fragment = new NotesFragment();
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.drawer_layout, fragment)
-                    .commit();
-        }
-        readSettings();
-        initView();
+                    .commit();}
+
     }
 
     private void initView() {
@@ -92,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 addFragment(new SettingsFragment());
                 return true;
             case R.id.action_main:
-                addFragment(new Notes());
+                addFragment(new NotesFragment());
                 return true;
         }
         return false;
@@ -154,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         buttonMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFragment(new Notes());
+                addFragment(new NotesFragment());
             }
         });
     }

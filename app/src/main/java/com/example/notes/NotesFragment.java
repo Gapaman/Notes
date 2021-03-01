@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notes extends Fragment implements NotesAdapterCallback{
+public class NotesFragment extends Fragment implements NotesAdapterCallback{
     private final List<SimpleNote> notes = new ArrayList<>();
     private final NotesAdapter notesAdapter = new NotesAdapter(this);
     @Override

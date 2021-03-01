@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.SimpleNoteViewHolder> {
 
-    private static final String TAG = "CitiesAdapter";
+    private static final String TAG = "NotesAdapter";
 
     private final List<SimpleNote> notes = new ArrayList<>();
     private final NotesAdapterCallback callback;
@@ -32,7 +32,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.SimpleNoteVi
     @NonNull
     @Override
     public SimpleNoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notes, parent, false);
         return new SimpleNoteViewHolder(view);
     }
 
